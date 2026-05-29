@@ -1,0 +1,50 @@
+.ds-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &--sm svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  &--md svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  &--lg svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+.ds-spinner__track {
+  stroke: var(--color-border-strong);
+  stroke-width: 3;
+}
+
+.ds-spinner__indicator {
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 45;
+  transform-origin: center;
+  animation: ds-spin var(--duration-slower, 800ms) var(--ease-linear, linear) infinite;
+}
+
+@keyframes ds-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-spinner__indicator {
+    animation: none;
+    stroke-dashoffset: 20;
+  }
+}

@@ -1,0 +1,122 @@
+{/* Design System introduction & token reference */}
+
+# Movie Picker — Design System
+
+A dark-first, accessibility-first design system built on **CSS custom properties**
+and **Angular CDK** primitives.
+
+---
+
+## Philosophy
+
+| Principle | Rule |
+|---|---|
+| **Tokens, not values** | Components reference semantic tokens (`--color-bg-surface`), never raw colours |
+| **Never hover-only** | Every interactive thing is reachable by keyboard and D-pad |
+| **TV-first additive** | The `data-theme="tv"` variant scales everything up — base tokens always work as fallback |
+| **Reduced motion** | `prefers-reduced-motion` zeroes all `--duration-*` tokens automatically |
+| **100 % tested** | Every component has unit tests + a Storybook story with an axe accessibility check |
+
+---
+
+## Theming
+
+Set `data-theme="tv"` on `<html>` to activate the **10-foot / TV variant**.
+`PlatformService` does this automatically when the app runs on webOS.
+
+```html
+<!-- web (default) -->
+<html>…</html>
+
+<!-- TV / webOS -->
+<html data-theme="tv">…</html>
+```
+
+---
+
+## Colour tokens
+
+### Backgrounds
+
+| Token | Value |
+|---|---|
+| `--color-bg-base` | `#030712` (neutral-950) |
+| `--color-bg-surface` | `#111827` (neutral-900) |
+| `--color-bg-elevated` | `#1f2937` (neutral-800) |
+| `--color-bg-overlay` | `rgba(0,0,0,0.75)` |
+
+### Text
+
+| Token | Value |
+|---|---|
+| `--color-text-primary` | `#ffffff` |
+| `--color-text-secondary` | `#9ca3af` (neutral-400) |
+| `--color-text-muted` | `#4b5563` (neutral-600) |
+| `--color-text-brand` | `#e50914` (brand-500) |
+| `--color-text-accent` | `#fbbf24` (accent-400) |
+
+### Focus ring
+
+| Token | Web default | TV override |
+|---|---|---|
+| `--color-focus-ring` | `#60a5fa` (blue-400) | `#fbbf24` (accent-400) |
+| `--focus-ring-width` | `2px` | `4px` |
+| `--focus-ring-offset` | `2px` | `4px` |
+
+---
+
+## Type scale
+
+| Token | Web | TV |
+|---|---|---|
+| `--font-size-xs` | 12 px | 18 px |
+| `--font-size-sm` | 14 px | 20 px |
+| `--font-size-md` | 16 px | 24 px |
+| `--font-size-lg` | 18 px | 30 px |
+| `--font-size-xl` | 20 px | 36 px |
+| `--font-size-2xl` | 24 px | 42 px |
+| `--font-size-3xl` | 30 px | 48 px |
+| `--font-size-4xl` | 36 px | 60 px |
+| `--font-size-5xl` | 48 px | 72 px |
+
+---
+
+## Spacing (4 px grid)
+
+`--space-1` (4 px) → `--space-2` (8 px) → `--space-3` (12 px) → `--space-4` (16 px)
+→ `--space-6` (24 px) → `--space-8` (32 px) → `--space-12` (48 px) → `--space-16` (64 px)
+
+TV variant scales each step by ~1.5×.
+
+---
+
+## Interactive targets
+
+| Context | `--interactive-min-size` |
+|---|---|
+| Web | `2.75rem` (44 px) — WCAG 2.5.5 |
+| TV | `4.5rem` (72 px) — comfortable D-pad navigation |
+
+---
+
+## Motion
+
+| Token | Value |
+|---|---|
+| `--duration-fast` | 100 ms (TV: 150 ms) |
+| `--duration-normal` | 200 ms (TV: 250 ms) |
+| `--duration-slow` | 300 ms (TV: 400 ms) |
+| `--ease-out` | `cubic-bezier(0,0,0.2,1)` |
+| `--ease-spring` | `cubic-bezier(0.34,1.56,0.64,1)` |
+
+All duration tokens become `0ms` when `prefers-reduced-motion: reduce` is set.
+
+---
+
+## File location
+
+```
+src/app/design-system/tokens/_tokens.scss
+```
+
+Imported globally in `src/styles.scss` via `@use 'app/design-system/tokens/tokens'`.

@@ -1,0 +1,12 @@
+{
+  "id": "com.choosemovie.app",
+  "version": "0.0.1",
+  "type": "web",
+  "main": "index.html",
+  "title": "Choose a Movie",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "iconColor": "#111827",
+  "vendor": "",
+  "resolution": "1920x1080"
+}

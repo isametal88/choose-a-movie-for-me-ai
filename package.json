@@ -6,25 +6,79 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
+    "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,html,scss}\"",
+    "e2e": "playwright test",
+    "e2e:report": "playwright show-report",
+    "prepare": "husky",
+    "storybook": "ng run choose-a-movie-for-me-ai:storybook",
+    "build-storybook": "ng run choose-a-movie-for-me-ai:build-storybook",
+    "build:webos": "ng build --configuration webos",
+    "package:webos": "npm run build:webos && ares-package dist/webos/browser -o dist/webos"
   },
   "private": true,
   "packageManager": "npm@11.2.0",
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.html": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.scss": [
+      "prettier --write"
+    ]
+  },
   "dependencies": {
+    "@angular/cdk": "^21.2.13",
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
     "@angular/core": "^21.2.0",
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "@ngrx/signals": "^21.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.2102.0",
+    "@angular-devkit/build-angular": "^21.2.0",
+    "@angular-devkit/core": "^21.2.0",
     "@angular/build": "^21.2.13",
     "@angular/cli": "^21.2.13",
     "@angular/compiler-cli": "^21.2.0",
+    "@angular/platform-browser-dynamic": "^21.2.0",
+    "@axe-core/playwright": "^4.11.3",
+    "@compodoc/compodoc": "^1.2.1",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
+    "@storybook/addon-a11y": "^10.4.1",
+    "@storybook/addon-docs": "^10.4.1",
+    "@storybook/addon-onboarding": "^10.4.1",
+    "@storybook/angular": "^10.4.1",
+    "@types/jest": "^30.0.0",
+    "angular-eslint": "21.4.0",
+    "axe-core": "^4.11.4",
+    "eslint": "^10.3.0",
+    "eslint-plugin-storybook": "^10.4.1",
+    "husky": "^9.1.7",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
+    "jest-preset-angular": "^16.1.5",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
-    "typescript": "~5.9.2"
+    "storybook": "^10.4.1",
+    "ts-jest": "^29.4.11",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.59.2"
   }
 }
