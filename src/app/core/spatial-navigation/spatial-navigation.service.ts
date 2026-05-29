@@ -65,8 +65,11 @@ export class SpatialNavigationService implements OnDestroy {
   }
 
   private _isVisible(el: HTMLElement): boolean {
-    const rect = el.getBoundingClientRect();
-    return rect.width > 0 || rect.height > 0 || el.getClientRects().length > 0;
+    const r = el.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) return false;
+    const vw = window.innerWidth || document.documentElement.clientWidth;
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    return r.right > 0 && r.bottom > 0 && r.left < vw && r.top < vh;
   }
 
   private _moveFocus(direction: 'up' | 'down' | 'left' | 'right', originalEvent: Event): void {
@@ -80,48 +83,70 @@ export class SpatialNavigationService implements OnDestroy {
       return;
     }
 
-    const currentRect = current.getBoundingClientRect();
+    const cr = current.getBoundingClientRect();
     const candidates = focusable.filter((el) => {
       if (el === current) return false;
       const r = el.getBoundingClientRect();
       switch (direction) {
         case 'up':
-          return r.bottom <= currentRect.top + 1;
+          return r.bottom <= cr.top + 1;
         case 'down':
-          return r.top >= currentRect.bottom - 1;
+          return r.top >= cr.bottom - 1;
         case 'left':
-          return r.right <= currentRect.left + 1;
+          return r.right <= cr.left + 1;
         case 'right':
-          return r.left >= currentRect.right - 1;
+          return r.left >= cr.right - 1;
       }
     });
 
     if (!candidates.length) return;
 
     const best = candidates.reduce((a, b) => {
-      return this._distance(a.getBoundingClientRect(), currentRect) <=
-        this._distance(b.getBoundingClientRect(), currentRect)
-        ? a
-        : b;
+      const ra = a.getBoundingClientRect();
+      const rb = b.getBoundingClientRect();
+      return this._score(ra, cr, direction) <= this._score(rb, cr, direction) ? a : b;
     });
 
     best.focus();
+    best.scrollIntoView?.({ block: 'nearest', inline: 'nearest' });
     originalEvent.preventDefault();
   }
 
-  private _distance(r: DOMRect, from: DOMRect): number {
-    const cx = from.left + from.width / 2;
-    const cy = from.top + from.height / 2;
-    const tx = r.left + r.width / 2;
-    const ty = r.top + r.height / 2;
-    return Math.hypot(tx - cx, ty - cy);
+  // primaryGap: edge-to-edge distance in the movement direction.
+  // perpGap: how far the perpendicular ranges are from overlapping (0 = same row/column).
+  // Elements in the same row/column win over diagonal ones regardless of raw distance.
+  private _score(r: DOMRect, from: DOMRect, direction: 'up' | 'down' | 'left' | 'right'): number {
+    let primaryGap: number;
+    let perpGap: number;
+
+    switch (direction) {
+      case 'right':
+        primaryGap = Math.max(0, r.left - from.right);
+        perpGap = Math.max(0, Math.max(from.top, r.top) - Math.min(from.bottom, r.bottom));
+        break;
+      case 'left':
+        primaryGap = Math.max(0, from.left - r.right);
+        perpGap = Math.max(0, Math.max(from.top, r.top) - Math.min(from.bottom, r.bottom));
+        break;
+      case 'down':
+        primaryGap = Math.max(0, r.top - from.bottom);
+        perpGap = Math.max(0, Math.max(from.left, r.left) - Math.min(from.right, r.right));
+        break;
+      case 'up':
+        primaryGap = Math.max(0, from.top - r.bottom);
+        perpGap = Math.max(0, Math.max(from.left, r.left) - Math.min(from.right, r.right));
+        break;
+    }
+
+    return primaryGap + perpGap * 5;
   }
 
   private _confirmFocused(originalEvent: Event): void {
     const active = document.activeElement as HTMLElement | null;
     if (!active) return;
     const tag = active.tagName.toLowerCase();
-    if (tag === 'button' || tag === 'a' || active.getAttribute('role') === 'button') {
+    const role = active.getAttribute('role');
+    if (tag === 'button' || tag === 'a' || role === 'button') {
       active.click();
       originalEvent.preventDefault();
     }

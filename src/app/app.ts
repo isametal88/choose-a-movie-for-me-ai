@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { InputDispatcherService } from './core/input/input-dispatcher.service';
 import { PlatformService } from './core/platform/platform.service';
+import { SpatialNavigationService } from '@core/spatial-navigation';
 
 @Component({
   selector: 'app-root',
@@ -19,11 +20,13 @@ export class App implements OnInit, OnDestroy {
   private readonly document = inject(DOCUMENT);
   private readonly location = inject(Location);
   private readonly dispatcher = inject(InputDispatcherService);
+  private readonly spatialNav = inject(SpatialNavigationService);
   private readonly sub = new Subscription();
 
   ngOnInit(): void {
     if (this.platform.isWebOS) {
       this.document.documentElement.setAttribute('data-theme', 'tv');
+      this.spatialNav.enable();
     }
 
     this.sub.add(

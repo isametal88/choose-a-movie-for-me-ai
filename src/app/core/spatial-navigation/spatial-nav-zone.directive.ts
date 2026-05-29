@@ -1,7 +1,7 @@
 import { Directive, OnDestroy, OnInit, inject } from '@angular/core';
 import { SpatialNavigationService } from './spatial-navigation.service';
 
-/** Apply this directive to a route host element to activate D-pad spatial navigation. */
+/** Apply this directive to a route host element to ensure D-pad spatial navigation is active. */
 @Directive({
   selector: '[appSpatialNavZone]',
 })

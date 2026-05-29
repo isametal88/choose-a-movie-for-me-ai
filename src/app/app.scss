@@ -1,0 +1,7 @@
+// TV layout: lock app to 100vh, let the active screen scroll internally
+:host-context([data-theme='tv']) {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}

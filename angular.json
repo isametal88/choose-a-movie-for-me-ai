@@ -67,10 +67,20 @@
               "outputPath": "dist/webos",
               "outputHashing": "none",
               "optimization": true,
+              "index": {
+                "input": "src/index.webos.html",
+                "output": "index.html"
+              },
+              "polyfills": ["src/polyfills.webos.ts"],
+              "tsConfig": "tsconfig.webos.json",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.webos.ts"
+                },
+                {
+                  "replace": "src/main.ts",
+                  "with": "src/main.webos.ts"
                 }
               ],
               "assets": [
@@ -91,6 +101,11 @@
                 {
                   "glob": "largeIcon.png",
                   "input": "webos",
+                  "output": "/"
+                },
+                {
+                  "glob": "es-module-shims.js",
+                  "input": "node_modules/es-module-shims/dist",
                   "output": "/"
                 }
               ]

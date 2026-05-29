@@ -32,3 +32,56 @@ body {
 :focus:not(:focus-visible) {
   outline: none;
 }
+
+// ── TV / webOS layout ────────────────────────────────────────────────────────
+// Lock the viewport to 100vh, let each screen component scroll internally.
+// This prevents the remote D-pad from scrolling the browser window.
+[data-theme='tv'] {
+  html,
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  app-root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  // The active route component fills the remaining space and scrolls internally.
+  // router-outlet renders the component as its next sibling.
+  app-root > *:not(app-header):not(router-outlet) {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    // Hide the scrollbar — navigation is via D-pad, not mouse
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  // Each screen fills the remaining space and scrolls internally
+  .filters-screen,
+  .pick-screen,
+  .detail-screen {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  // Chrome 68 does not support :focus-visible — use :focus for all TV focus styles.
+  // Override the global :focus:not(:focus-visible) { outline: none } rule.
+  *:focus {
+    outline: var(--focus-ring-width) solid var(--color-focus-ring) !important;
+    outline-offset: var(--focus-ring-offset) !important;
+    border-radius: var(--radius-sm);
+  }
+}

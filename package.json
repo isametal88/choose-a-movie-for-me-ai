@@ -18,8 +18,8 @@
     "prepare": "husky",
     "storybook": "ng run choose-a-movie-for-me-ai:storybook",
     "build-storybook": "ng run choose-a-movie-for-me-ai:build-storybook",
-    "build:webos": "ng build --configuration webos",
-    "package:webos": "npm run build:webos && ares-package dist/webos/browser -o dist/webos"
+    "build:webos": "NODE_ENV=webos ng build --configuration webos",
+    "package:webos": "npm run build:webos && bash scripts/package-webos.sh"
   },
   "private": true,
   "packageManager": "npm@11.2.0",
@@ -34,6 +34,21 @@
     ],
     "src/**/*.scss": [
       "prettier --write"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "> 0.5%",
+      "last 2 versions",
+      "Firefox ESR",
+      "not dead"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ],
+    "webos": [
+      "chrome 68"
     ]
   },
   "dependencies": {
@@ -67,6 +82,7 @@
     "@types/jest": "^30.0.0",
     "angular-eslint": "21.4.0",
     "axe-core": "^4.11.4",
+    "es-module-shims": "^2.8.1",
     "eslint": "^10.3.0",
     "eslint-plugin-storybook": "^10.4.1",
     "husky": "^9.1.7",
