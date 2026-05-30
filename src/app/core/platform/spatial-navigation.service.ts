@@ -77,8 +77,6 @@ export class SpatialNavigationService {
           gap = Math.max(0, cr.top - r.bottom);
           lateral = Math.abs(ecx - acx);
           break;
-        default:
-          continue;
       }
 
       const score = gap + lateral * 2;

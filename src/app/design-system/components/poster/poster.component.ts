@@ -25,7 +25,17 @@ import { Component, computed, input, signal } from '@angular/core';
       }
       @if (hasError()) {
         <div class="ds-poster__error-state" [attr.aria-label]="'Poster not available for ' + alt()">
-          <span class="ds-poster__error-icon" aria-hidden="true">🎬</span>
+          <svg
+            class="ds-poster__error-icon"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <rect x="2" y="6" width="20" height="14" rx="2" />
+            <path d="M8 6V4M16 6V4M2 10h20" />
+          </svg>
         </div>
       }
     </div>
@@ -38,9 +48,9 @@ import { Component, computed, input, signal } from '@angular/core';
       .ds-poster {
         position: relative;
         width: 100%;
-        aspect-ratio: 2/3;
-        background: var(--color-surface-2);
-        border-radius: var(--radius-md);
+        aspect-ratio: 11/16;
+        background: var(--navy-800);
+        border-radius: 0;
         overflow: hidden;
       }
       .ds-poster__img {
@@ -52,7 +62,13 @@ import { Component, computed, input, signal } from '@angular/core';
       .ds-poster__placeholder {
         position: absolute;
         inset: 0;
-        background: var(--color-surface-2);
+        background: repeating-linear-gradient(
+          135deg,
+          var(--navy-800),
+          var(--navy-800) 12px,
+          var(--navy-700) 12px,
+          var(--navy-700) 24px
+        );
       }
       .ds-poster__shimmer {
         display: block;
@@ -60,9 +76,9 @@ import { Component, computed, input, signal } from '@angular/core';
         height: 100%;
         background: linear-gradient(
           90deg,
-          var(--color-surface-2) 25%,
-          var(--color-surface-3, #374151) 50%,
-          var(--color-surface-2) 75%
+          transparent 25%,
+          rgba(255, 255, 255, 0.04) 50%,
+          transparent 75%
         );
         background-size: 200% 100%;
         animation: shimmer var(--duration-slower, 1.5s) infinite;
@@ -81,10 +97,19 @@ import { Component, computed, input, signal } from '@angular/core';
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--color-surface-2);
+        background: repeating-linear-gradient(
+          135deg,
+          var(--navy-800),
+          var(--navy-800) 12px,
+          var(--navy-700) 12px,
+          var(--navy-700) 24px
+        );
       }
       .ds-poster__error-icon {
-        font-size: var(--font-size-4xl);
+        width: 48px;
+        height: 48px;
+        color: var(--ink-600);
+        opacity: 0.5;
       }
     `,
   ],

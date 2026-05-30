@@ -8,29 +8,24 @@ import { Component, input, model } from '@angular/core';
       :host {
         display: inline-flex;
         align-items: center;
-        padding: var(--space-1) var(--space-3);
-        border-radius: var(--radius-full);
-        border: 1.5px solid var(--color-border-strong);
-        font-size: var(--font-size-sm);
-        font-weight: 500;
+        padding: var(--sp-2) var(--sp-3);
+        border-radius: var(--r-sm);
+        font-size: var(--font-size-ui);
+        font-weight: var(--font-weight-semibold);
         cursor: pointer;
         user-select: none;
-        background: var(--color-bg-elevated);
-        color: var(--color-text-secondary);
+        background: var(--color-interactive-bg);
+        color: var(--color-text-primary);
         transition:
           background var(--duration-fast) var(--ease-out),
-          color var(--duration-fast) var(--ease-out),
-          border-color var(--duration-fast) var(--ease-out);
+          color var(--duration-fast) var(--ease-out);
       }
       :host(:hover) {
         background: var(--color-interactive-bg-hover);
-        color: var(--color-text-primary);
-        border-color: var(--color-navy-300);
       }
       :host([aria-pressed='true']) {
-        background: var(--color-brand-500);
-        border-color: var(--color-brand-500);
-        color: var(--color-neutral-0);
+        background: var(--color-interactive-bg-selected);
+        color: var(--white);
       }
       :host(:focus-visible) {
         outline: var(--focus-ring-width) solid var(--color-focus-ring);

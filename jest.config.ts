@@ -19,6 +19,9 @@ const config: Config = {
     '!src/app/app.routes.ts',
     // App config: DI factory bootstrapping (platform bridge selection) — tested indirectly via LUNA_BRIDGE token in unit tests
     '!src/app/app.config.ts',
+    // webOS-specific entry points — require native webOS runtime; untestable in Jest
+    '!src/main.webos.ts',
+    '!src/polyfills.webos.ts',
   ],
   coverageThreshold: {
     global: {

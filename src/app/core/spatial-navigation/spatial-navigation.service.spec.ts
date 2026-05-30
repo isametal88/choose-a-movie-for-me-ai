@@ -163,6 +163,57 @@ describe('SpatialNavigationService', () => {
       document.body.removeChild(right);
     });
 
+    it('picks nearest of two candidates to the right (_score case right)', () => {
+      const current = createFocusableButton(makeRect(0, 0, 80, 40));
+      const near = createFocusableButton(makeRect(0, 200, 80, 40));
+      const far = createFocusableButton(makeRect(0, 400, 80, 40));
+      document.body.appendChild(current);
+      document.body.appendChild(near);
+      document.body.appendChild(far);
+      current.focus();
+
+      const nearSpy = jest.spyOn(near, 'focus');
+      events$.next({ action: 'navigate-right', originalEvent: new KeyboardEvent('keydown') });
+      expect(nearSpy).toHaveBeenCalled();
+      document.body.removeChild(current);
+      document.body.removeChild(near);
+      document.body.removeChild(far);
+    });
+
+    it('picks nearest of two candidates to the left (_score case left)', () => {
+      const current = createFocusableButton(makeRect(0, 400, 80, 40));
+      const near = createFocusableButton(makeRect(0, 200, 80, 40));
+      const far = createFocusableButton(makeRect(0, 0, 80, 40));
+      document.body.appendChild(current);
+      document.body.appendChild(near);
+      document.body.appendChild(far);
+      current.focus();
+
+      const nearSpy = jest.spyOn(near, 'focus');
+      events$.next({ action: 'navigate-left', originalEvent: new KeyboardEvent('keydown') });
+      expect(nearSpy).toHaveBeenCalled();
+      document.body.removeChild(current);
+      document.body.removeChild(near);
+      document.body.removeChild(far);
+    });
+
+    it('picks nearest of two candidates above (_score case up)', () => {
+      const current = createFocusableButton(makeRect(400, 0, 100, 40));
+      const near = createFocusableButton(makeRect(200, 0, 100, 40));
+      const far = createFocusableButton(makeRect(0, 0, 100, 40));
+      document.body.appendChild(current);
+      document.body.appendChild(near);
+      document.body.appendChild(far);
+      current.focus();
+
+      const nearSpy = jest.spyOn(near, 'focus');
+      events$.next({ action: 'navigate-up', originalEvent: new KeyboardEvent('keydown') });
+      expect(nearSpy).toHaveBeenCalled();
+      document.body.removeChild(current);
+      document.body.removeChild(near);
+      document.body.removeChild(far);
+    });
+
     it('picks nearest element when multiple candidates exist (a closer)', () => {
       const current = createFocusableButton(makeRect(0, 0, 100, 40));
       const near = createFocusableButton(makeRect(200, 0, 100, 40));

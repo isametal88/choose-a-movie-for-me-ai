@@ -7,17 +7,18 @@ import { booleanAttribute, Component, input, output } from '@angular/core';
     `
       :host {
         display: block;
-        background: var(--color-surface-1);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
+        background: var(--color-bg-card);
+        border-radius: var(--r-md);
+        box-shadow: var(--shadow-card);
         overflow: hidden;
-        transition: box-shadow var(--duration-fast) var(--easing-standard);
+        color: var(--color-text-inverse);
+        transition: box-shadow var(--duration-fast) var(--ease);
       }
       :host([role='button']) {
         cursor: pointer;
       }
       :host([role='button']:hover) {
-        box-shadow: var(--shadow-md);
+        box-shadow: var(--shadow-pop);
       }
       :host([role='button']:focus-visible) {
         outline: var(--focus-ring-width) solid var(--color-focus-ring);

@@ -18,7 +18,7 @@ export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'info'
         white-space: nowrap;
       }
       :host(.ds-badge--default) {
-        background: var(--color-surface-2);
+        background: var(--color-interactive-bg);
         color: var(--color-text-primary);
       }
       :host(.ds-badge--success) {

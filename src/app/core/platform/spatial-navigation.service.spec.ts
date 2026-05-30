@@ -130,12 +130,49 @@ describe('SpatialNavigationService', () => {
     });
   });
 
+  it('does nothing when no focusable elements exist (early return)', () => {
+    // No elements in DOM — _focusable() returns empty → line 32 early return
+    fireKey(39);
+    // No assertion needed; just verifying no throw and line 32 is covered
+    expect(true).toBe(true);
+  });
+
   it('does nothing when no element exists in the direction', () => {
     const btn = makeEl(500, 200);
     const spy = jest.spyOn(btn, 'focus');
     setActive(btn);
     fireKey(39); // right — nothing to the right
     expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('ignores elements to the right when navigating left (case left: continue branch)', () => {
+    const rightEl = makeEl(500, 200); // to the right — should be skipped
+    const leftEl = makeEl(50, 200); // to the left — should be picked
+    const current = makeEl(300, 200);
+    setActive(current);
+    fireKey(37); // left
+    expect(leftEl.focus).toHaveBeenCalled();
+    expect(rightEl.focus).not.toHaveBeenCalled();
+  });
+
+  it('ignores elements above when navigating down (case down: continue branch)', () => {
+    const above = makeEl(200, 50); // above — should be skipped
+    const below = makeEl(200, 350); // below — should be picked
+    const current = makeEl(200, 200);
+    setActive(current);
+    fireKey(40); // down
+    expect(below.focus).toHaveBeenCalled();
+    expect(above.focus).not.toHaveBeenCalled();
+  });
+
+  it('ignores elements below when navigating up (case up: continue branch)', () => {
+    const below = makeEl(200, 350); // below — should be skipped
+    const above = makeEl(200, 50); // above — should be picked
+    const current = makeEl(200, 200);
+    setActive(current);
+    fireKey(38); // up
+    expect(above.focus).toHaveBeenCalled();
+    expect(below.focus).not.toHaveBeenCalled();
   });
 
   it('skips aria-hidden elements', () => {

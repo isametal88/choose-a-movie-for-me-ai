@@ -190,6 +190,69 @@ describe('FiltersComponent', () => {
       const chipDEs = fixture.debugElement.queryAll(By.directive(ChipComponent));
       expect(chipDEs[2].nativeElement.getAttribute('aria-pressed')).toBe('true');
     });
+
+    it('filters out providers not in IT_PROVIDER_IDS', async () => {
+      const customTmdb = {
+        ...makeTmdbSpy(),
+        getWatchProviders: jest.fn().mockReturnValue(
+          of({
+            results: [
+              {
+                logo_path: '/nf.jpg',
+                provider_id: 8,
+                provider_name: 'Netflix',
+                display_priority: 1,
+              },
+              {
+                logo_path: '/uk.jpg',
+                provider_id: 9999,
+                provider_name: 'UnknownService',
+                display_priority: 99,
+              },
+            ],
+          }),
+        ),
+      };
+      await TestBed.resetTestingModule();
+      await setup(customTmdb);
+      const chipDEs = fixture.debugElement.queryAll(By.directive(ChipComponent));
+      const texts = chipDEs.map((de) => de.nativeElement.textContent?.trim() ?? '');
+      expect(texts).toContain('Netflix');
+      expect(texts).not.toContain('UnknownService');
+    });
+
+    it('sorts providers by IT_PROVIDER_ORDER, providers not in order map sort last', async () => {
+      const customTmdb = {
+        ...makeTmdbSpy(),
+        getWatchProviders: jest.fn().mockReturnValue(
+          of({
+            results: [
+              {
+                logo_path: '/prime.jpg',
+                provider_id: 119,
+                provider_name: 'Amazon Prime Video',
+                display_priority: 2,
+              },
+              {
+                logo_path: '/nf.jpg',
+                provider_id: 8,
+                provider_name: 'Netflix',
+                display_priority: 1,
+              },
+            ],
+          }),
+        ),
+      };
+      await TestBed.resetTestingModule();
+      await setup(customTmdb);
+      const chipDEs = fixture.debugElement.queryAll(By.directive(ChipComponent));
+      // Netflix (order 0) should appear before Amazon (order 1)
+      const providerChips = chipDEs.filter((de) =>
+        ['Netflix', 'Amazon Prime Video'].some((n) => de.nativeElement.textContent?.includes(n)),
+      );
+      expect(providerChips[0].nativeElement.textContent).toContain('Netflix');
+      expect(providerChips[1].nativeElement.textContent).toContain('Amazon');
+    });
   });
 
   describe('rating slider', () => {

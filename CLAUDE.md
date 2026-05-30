@@ -94,4 +94,8 @@ Every piece of code that touches a platform-specific API must live behind a mock
 
 | File glob | Reason |
 |-----------|--------|
-| `src/core/platform/webos-luna.bridge.ts` | Invokes real Luna WebOS APIs; requires device emulator; untestable in Jest |
+| `src/app/core/platform/webos-luna.bridge.ts` | Invokes real Luna WebOS APIs; requires device emulator; untestable in Jest |
+| `src/main.webos.ts` | webOS-specific Angular bootstrap entry point; requires native webOS runtime |
+| `src/polyfills.webos.ts` | Chrome 68 polyfills that patch native prototypes; require webOS runtime context |
+| `src/app/app.routes.ts` | Lazy-loading lambdas; declarative config with no testable logic |
+| `src/app/app.config.ts` | DI factory bootstrapping (platform bridge selection); tested indirectly via LUNA_BRIDGE token |

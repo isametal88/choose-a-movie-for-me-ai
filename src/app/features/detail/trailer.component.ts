@@ -6,9 +6,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   template: `
     @if (trailerKey()) {
       @if (!isPlaying()) {
-        <button class="trailer__play-btn" (click)="play()" aria-label="Play trailer">
-          <span class="trailer__play-icon" aria-hidden="true">▶</span>
-          Watch trailer
+        <button class="trailer__play-btn" (click)="play()" aria-label="Watch trailer">
+          <span class="trailer__play-icon" aria-hidden="true">
+            <span class="trailer__play-arrow"></span>
+          </span>
         </button>
       } @else {
         <div class="trailer__player" role="region" aria-label="Trailer player">
@@ -31,21 +32,25 @@ import { DomSanitizer } from '@angular/platform-browser';
   `,
   styles: [
     `
+      /* Idle state: desaturated thumbnail with centered play button */
       .trailer__play-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-        background: none;
-        border: 1.5px solid var(--color-border);
-        border-radius: var(--radius-md);
-        padding: var(--space-2) var(--space-4);
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: var(--r-xs);
+        overflow: hidden;
+        filter: grayscale(1);
+        background: repeating-linear-gradient(
+          135deg,
+          #161616,
+          #161616 16px,
+          #202020 16px,
+          #202020 32px
+        );
+        border: none;
         cursor: pointer;
-        font-size: var(--font-size-base);
-        color: var(--color-text-primary);
-      }
-
-      .trailer__play-btn:hover {
-        background: var(--color-surface-2);
+        padding: 0;
       }
 
       .trailer__play-btn:focus-visible {
@@ -53,12 +58,39 @@ import { DomSanitizer } from '@angular/platform-browser';
         outline-offset: var(--focus-ring-offset);
       }
 
+      /* Translucent white circle with play icon */
       .trailer__play-icon {
-        font-size: var(--font-size-sm);
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .trailer__play-icon::after {
+        content: '';
+        display: block;
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.85);
+        /* SVG play triangle via clip-path */
+        mask-image: none;
+      }
+
+      /* Layered over the circle — the play arrow */
+      .trailer__play-arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 14px 0 14px 26px;
+        border-color: transparent transparent transparent var(--navy-800);
+        margin-left: 4px;
       }
 
       .trailer__player {
-        margin-top: var(--space-4);
+        margin-top: 0;
       }
 
       .trailer__iframe-wrapper {
@@ -67,7 +99,7 @@ import { DomSanitizer } from '@angular/platform-browser';
         padding-bottom: 56.25%;
         height: 0;
         overflow: hidden;
-        border-radius: var(--radius-md);
+        border-radius: var(--r-xs);
       }
 
       .trailer__iframe {
@@ -80,14 +112,21 @@ import { DomSanitizer } from '@angular/platform-browser';
       }
 
       .trailer__close-btn {
-        margin-top: var(--space-2);
-        background: none;
-        border: 1.5px solid var(--color-border);
-        border-radius: var(--radius-md);
-        padding: var(--space-1) var(--space-3);
+        margin-top: var(--sp-2);
+        background: var(--color-interactive-bg);
+        border: none;
+        border-radius: var(--r-xs);
+        padding: var(--sp-2) var(--sp-3);
         cursor: pointer;
-        font-size: var(--font-size-sm);
-        color: var(--color-text-secondary);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text-primary);
+        transition: background var(--transition-fast);
+      }
+
+      .trailer__close-btn:hover {
+        background: var(--color-interactive-bg-hover);
       }
 
       .trailer__close-btn:focus-visible {

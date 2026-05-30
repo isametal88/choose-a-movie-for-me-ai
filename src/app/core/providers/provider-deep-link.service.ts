@@ -11,22 +11,14 @@ interface ProviderConfig {
 const enc = encodeURIComponent;
 
 /**
- * Known provider strategies.
- * Tier 1 (search-prefilled): build a search URL for the provider's own app/site.
- * Tier 2 (JustWatch fallback): provider not listed here — fall back to the JustWatch link.
+ * Known provider strategies — Italy (IT region).
+ * Tier 1 (search-prefilled): direct search URL for the provider's site/app.
+ * Tier 2 (JustWatch fallback): provider not in this map → use justWatchLink.
  *
- * Provider IDs from TMDB watch/providers:
- *   8   Netflix           search-prefilled  webOS: netflix
- *   119 Amazon Prime      search-prefilled  webOS: amazon
- *   337 Disney+           search-prefilled  webOS: com.disney.disneyplus-prod
- *   350 Apple TV+         search-prefilled  webOS: com.apple.appletv
- *   192 YouTube           search-prefilled  webOS: youtube.leanback.v4
- *   531 Paramount+        search-prefilled  (no known webOS app ID)
- *   227 Rai Play          search-prefilled  (no known webOS app ID)
- *    39 NOW               search-prefilled  (no known webOS app ID)
- *    11 MUBI              search-prefilled  (no known webOS app ID)
+ * Provider IDs align with TMDB watch/providers (region IT).
  */
 const PROVIDER_CONFIGS: Record<number, ProviderConfig> = {
+  // ── Tier 1 — direct search URL ──────────────────────────────────────────
   8: { buildUrl: (t) => `https://www.netflix.com/search?q=${enc(t)}`, webosAppId: 'netflix' },
   119: { buildUrl: (t) => `https://www.amazon.it/s?k=${enc(t)}`, webosAppId: 'amazon' },
   337: {
@@ -37,14 +29,23 @@ const PROVIDER_CONFIGS: Record<number, ProviderConfig> = {
     buildUrl: (t) => `https://tv.apple.com/search?term=${enc(t)}`,
     webosAppId: 'com.apple.appletv',
   },
+  39: { buildUrl: (t) => `https://www.nowtv.it/cerca#${enc(t)}` },
+  531: { buildUrl: (t) => `https://www.paramountplus.com/search/${enc(t)}/` },
+  227: { buildUrl: (t) => `https://www.raiplay.it/ricerca?q=${enc(t)}` },
+  11: { buildUrl: (t) => `https://mubi.com/it/search?q=${enc(t)}` },
+  283: { buildUrl: (t) => `https://www.crunchyroll.com/search?q=${enc(t)}` },
+  510: { buildUrl: (t) => `https://www.discoveryplus.com/it/search?q=${enc(t)}` },
+  591: { buildUrl: (t) => `https://www.mediasetinfinity.it/ricerca?q=${enc(t)}` },
+  695: { buildUrl: (t) => `https://www.dazn.com/it-IT/search?q=${enc(t)}` },
+  109: { buildUrl: (t) => `https://www.timvision.it/search?q=${enc(t)}` },
   192: {
     buildUrl: (t) => `https://www.youtube.com/results?search_query=${enc(t)}`,
     webosAppId: 'youtube.leanback.v4',
   },
-  531: { buildUrl: (t) => `https://www.paramountplus.com/search/${enc(t)}/` },
-  227: { buildUrl: (t) => `https://www.raiplay.it/ricerca?q=${enc(t)}` },
-  39: { buildUrl: (t) => `https://www.nowtv.it/cerca#${enc(t)}` },
-  11: { buildUrl: (t) => `https://mubi.com/it/search?q=${enc(t)}` },
+  1899: { buildUrl: (t) => `https://www.max.com/search?q=${enc(t)}` },
+  35: { buildUrl: (t) => `https://www.rakuten.tv/it/search?q=${enc(t)}` },
+  538: { buildUrl: (t) => `https://watch.plex.tv/search?q=${enc(t)}` },
+  // IDs 40 (Chili), 3 (Google Play), 68 (Microsoft) fall back to JustWatch
 };
 
 @Injectable({ providedIn: 'root' })

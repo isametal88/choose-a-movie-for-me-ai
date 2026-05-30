@@ -5,3 +5,13 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.app-footer {
+  background: var(--cyan-500);
+  color: var(--white);
+  text-align: center;
+  padding: var(--sp-4) var(--sp-5);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-ui);
+  font-weight: var(--font-weight-semibold);
+}

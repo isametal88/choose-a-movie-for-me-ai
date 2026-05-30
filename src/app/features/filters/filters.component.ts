@@ -9,6 +9,7 @@ import { ButtonComponent } from '../../design-system/primitives/button/button.co
 import { TmdbClient } from '../../core/tmdb/tmdb.client';
 import { TmdbConfigService } from '../../core/tmdb/tmdb-config.service';
 import { TmdbWatchProvider } from '../../core/tmdb/tmdb.models';
+import { IT_PROVIDER_IDS, IT_PROVIDER_ORDER } from '../../core/providers/it-providers.const';
 import { SpatialNavZoneDirective } from '../../core/spatial-navigation/spatial-nav-zone.directive';
 import { CriteriaStore } from '../criteria/criteria.store';
 
@@ -148,18 +149,24 @@ import { CriteriaStore } from '../criteria/criteria.store';
       .filters-screen {
         max-width: 1100px;
         margin: 0 auto;
-        padding: var(--space-8) var(--space-6);
+        padding: var(--sp-6) var(--sp-5);
+      }
+
+      @media (min-width: 600px) {
+        .filters-screen {
+          padding: var(--sp-7) var(--sp-6);
+        }
       }
 
       /* ── Search bar ─────────────────────────────────────────── */
 
       .filters-screen__search-section {
-        margin-bottom: var(--space-8);
+        margin-bottom: var(--sp-6);
       }
 
       .filters-screen__search-note {
-        margin: var(--space-2) 0 0;
-        font-size: var(--font-size-sm);
+        margin: var(--sp-2) 0 0;
+        font-size: var(--font-size-caption);
         color: var(--color-text-muted);
         font-style: italic;
       }
@@ -168,8 +175,8 @@ import { CriteriaStore } from '../criteria/criteria.store';
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--space-3);
-        padding-top: var(--space-4);
+        gap: var(--sp-3);
+        padding-top: var(--sp-4);
       }
 
       /* ── Two-column body ────────────────────────────────────── */
@@ -177,12 +184,12 @@ import { CriteriaStore } from '../criteria/criteria.store';
       .filters-screen__body {
         display: grid;
         grid-template-columns: 1fr;
-        gap: var(--space-8);
+        gap: var(--sp-6);
       }
 
       @media (min-width: 900px) {
         .filters-screen__body {
-          grid-template-columns: 1fr 280px;
+          grid-template-columns: 1fr 300px;
           align-items: start;
         }
       }
@@ -190,7 +197,7 @@ import { CriteriaStore } from '../criteria/criteria.store';
       /* ── Individual sections ────────────────────────────────── */
 
       .filters-screen__section {
-        margin-bottom: var(--space-6);
+        margin-bottom: var(--sp-5);
       }
 
       .filters-screen__section:last-child {
@@ -198,27 +205,27 @@ import { CriteriaStore } from '../criteria/criteria.store';
       }
 
       .filters-screen__section-title {
-        font-size: var(--font-size-xs);
-        font-weight: var(--font-weight-semibold);
-        color: var(--color-text-muted);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-extrabold);
+        color: var(--orange-500);
         text-transform: uppercase;
         letter-spacing: var(--letter-spacing-widest);
-        margin: 0 0 var(--space-3);
+        margin: 0 0 var(--sp-3);
       }
 
       .filters-screen__toggle {
         display: flex;
-        gap: var(--space-2);
+        gap: var(--sp-2);
       }
 
       .filters-screen__chips {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--space-2);
+        gap: var(--sp-2);
       }
 
       .filters-screen__loading {
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-caption);
         color: var(--color-text-muted);
         font-style: italic;
       }
@@ -226,45 +233,44 @@ import { CriteriaStore } from '../criteria/criteria.store';
       .filters-screen__provider-logo {
         width: 18px;
         height: 18px;
-        border-radius: var(--radius-sm);
+        border-radius: var(--r-xs);
         object-fit: cover;
-        margin-inline-end: var(--space-1);
+        margin-inline-end: var(--sp-1);
         vertical-align: middle;
         flex-shrink: 0;
       }
 
-      /* ── CTA panel (right column) ──────────────────────────── */
+      /* ── CTA panel (right column) — white card on navy stage ── */
 
       .filters-screen__cta-panel {
         position: sticky;
-        top: calc(var(--space-16) + var(--space-4)); /* below fixed header */
+        top: calc(var(--sp-8) + var(--sp-4));
       }
 
       .filters-screen__cta-card {
-        background: var(--color-bg-elevated);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-xl);
-        padding: var(--space-8) var(--space-6);
+        background: var(--color-bg-card);
+        border-radius: var(--r-md);
+        box-shadow: var(--shadow-card);
+        padding: var(--sp-6) var(--sp-5);
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        gap: var(--space-4);
+        gap: var(--sp-4);
         text-align: center;
       }
 
       .filters-screen__cta-headline {
-        font-family: var(--font-family-display);
-        font-size: var(--font-size-3xl);
-        font-weight: 700;
-        color: var(--color-text-primary);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-h1);
+        font-weight: var(--font-weight-extrabold);
+        color: var(--ink-900);
         margin: 0;
-        letter-spacing: var(--letter-spacing-wider);
-        text-transform: uppercase;
+        letter-spacing: var(--letter-spacing-tight);
       }
 
       .filters-screen__cta-sub {
-        font-size: var(--font-size-sm);
-        color: var(--color-text-secondary);
+        font-size: var(--font-size-body);
+        color: var(--ink-600);
         margin: 0;
         line-height: var(--line-height-relaxed);
       }
@@ -296,9 +302,12 @@ export class FiltersComponent {
     this.store.mediaType() === 'movie' ? this.movieGenres() : this.tvGenres(),
   );
 
-  protected readonly watchProviders = computed(() =>
-    this.store.mediaType() === 'movie' ? this.movieProviders() : this.tvProviders(),
-  );
+  protected readonly watchProviders = computed(() => {
+    const raw = this.store.mediaType() === 'movie' ? this.movieProviders() : this.tvProviders();
+    return raw
+      .filter((p) => IT_PROVIDER_IDS.has(p.provider_id))
+      .sort((a, b) => IT_PROVIDER_ORDER[a.provider_id] - IT_PROVIDER_ORDER[b.provider_id]);
+  });
 
   protected logoUrl(path: string): string {
     return this.config.imageUrl(path, 'original');

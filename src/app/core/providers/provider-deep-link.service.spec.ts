@@ -69,6 +69,56 @@ describe('ProviderDeepLinkService', () => {
     expect(result.webosAppId).toBeUndefined();
   });
 
+  // ── Tier 1: new IT providers ────────────────────────────────────────────────
+
+  it('Crunchyroll (283) — search-prefilled URL, no webOS app ID', () => {
+    const result = service.build(283, 'Attack on Titan');
+    expect(result.url).toBe('https://www.crunchyroll.com/search?q=Attack%20on%20Titan');
+    expect(result.webosAppId).toBeUndefined();
+  });
+
+  it('Discovery+ (510) — search-prefilled URL, no webOS app ID', () => {
+    const result = service.build(510, 'Casa a prima vista');
+    expect(result.url).toContain('discoveryplus.com');
+    expect(result.webosAppId).toBeUndefined();
+  });
+
+  it('Mediaset Infinity (591) — search-prefilled URL, no webOS app ID', () => {
+    const result = service.build(591, 'Le Iene');
+    expect(result.url).toContain('mediasetinfinity.it');
+    expect(result.webosAppId).toBeUndefined();
+  });
+
+  it('DAZN (695) — search-prefilled URL, no webOS app ID', () => {
+    const result = service.build(695, 'Formula 1');
+    expect(result.url).toContain('dazn.com');
+    expect(result.webosAppId).toBeUndefined();
+  });
+
+  it('TimVision (109) — search-prefilled URL, no webOS app ID', () => {
+    const result = service.build(109, 'MasterChef');
+    expect(result.url).toContain('timvision.it');
+    expect(result.webosAppId).toBeUndefined();
+  });
+
+  it('Max/HBO (1899) — search-prefilled URL, no webOS app ID', () => {
+    const result = service.build(1899, 'The Last of Us');
+    expect(result.url).toBe('https://www.max.com/search?q=The%20Last%20of%20Us');
+    expect(result.webosAppId).toBeUndefined();
+  });
+
+  it('Rakuten TV (35) — search-prefilled URL, no webOS app ID', () => {
+    const result = service.build(35, 'Top Gun');
+    expect(result.url).toContain('rakuten.tv');
+    expect(result.webosAppId).toBeUndefined();
+  });
+
+  it('Plex (538) — search-prefilled URL, no webOS app ID', () => {
+    const result = service.build(538, 'Free film');
+    expect(result.url).toContain('plex.tv');
+    expect(result.webosAppId).toBeUndefined();
+  });
+
   // ── Tier 2: JustWatch fallback for unknown providers ────────────────────────
 
   it('unknown provider with justWatchLink — returns JustWatch URL', () => {

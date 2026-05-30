@@ -6,16 +6,22 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--color-bg-chrome); // light chrome matches header
+}
+
 body {
   margin: 0;
   padding: 0;
   min-height: 100%;
   font-family: var(--font-family-base);
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-normal);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
   color: var(--color-text-primary);
-  background-color: var(--color-bg-base);
+  background-color: var(--color-bg-base); // navy stage for content
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

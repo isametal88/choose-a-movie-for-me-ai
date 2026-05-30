@@ -38,18 +38,18 @@ import { Component, computed, input, model, signal } from '@angular/core';
         align-items: baseline;
       }
       .ds-slider__label {
-        font-size: var(--font-size-sm);
-        font-weight: 500;
+        font-size: var(--font-size-ui);
+        font-weight: var(--font-weight-semibold);
         color: var(--color-text-primary);
       }
       .ds-slider__value {
-        font-size: var(--font-size-sm);
-        color: var(--color-accent);
-        font-weight: 600;
+        font-size: var(--font-size-ui);
+        color: var(--color-brand-500);
+        font-weight: var(--font-weight-bold);
       }
       .ds-slider__control {
         width: 100%;
-        accent-color: var(--color-accent);
+        accent-color: var(--color-brand-500);
         cursor: pointer;
       }
       .ds-slider__control:focus-visible {

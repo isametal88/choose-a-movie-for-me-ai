@@ -1,218 +1,271 @@
-// Design Tokens — CSS custom properties on :root
-// Use semantic tokens (--color-bg-*, --color-text-*, etc.) in components.
-// Raw palette tokens are for reference only.
+// Design Tokens — Choose a Movie
+// Single source of truth driven by the style guide.
+// Use semantic tokens (--color-*, etc.) in components — never raw palette values directly.
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Raw colour palette
+// Raw palette — style guide canonical names
 // ─────────────────────────────────────────────────────────────────────────────
 :root {
-  // Neutrals (kept for legacy compatibility in specs)
-  --color-neutral-0: #ffffff;
-  --color-neutral-50: #f9fafb;
-  --color-neutral-100: #f3f4f6;
-  --color-neutral-200: #e5e7eb;
-  --color-neutral-300: #d1d5db;
-  --color-neutral-400: #9ca3af;
-  --color-neutral-500: #6b7280;
-  --color-neutral-600: #4b5563;
-  --color-neutral-700: #374151;
-  --color-neutral-800: #1f2937;
-  --color-neutral-900: #111827;
-  --color-neutral-950: #030712;
+  // Navy — surfaces (cinematic dark stage)
+  --navy-900: #232f3e;
+  --navy-800: #293647;
+  --navy-700: #344458;
+  --navy-600: #3c526d;
+  --navy-500: #4a6075;
 
-  // Navy — primary UI backgrounds
-  --color-navy-950: #070e18;
-  --color-navy-900: #0e1b2a; // deepest bg
-  --color-navy-800: #162032; // nav bar
-  --color-navy-700: #1e2d42; // content bg
-  --color-navy-600: #263a53; // surface
-  --color-navy-500: #2f4963; // elevated surface
-  --color-navy-400: #3d5f7e; // borders
-  --color-navy-300: #5c7e9b; // muted text / icons
-  --color-navy-200: #8dafc8; // secondary text
-  --color-navy-100: #c1d7e9; // light accent text
+  // Orange — primary action (one per view)
+  --orange-400: #f47a4d;
+  --orange-500: #f05a24;
+  --orange-600: #d94e1f;
 
-  // Brand orange — primary action colour
-  --color-orange-100: #fde8dc;
-  --color-orange-400: #f59060;
-  --color-orange-500: #e8622a; // primary CTA
-  --color-orange-600: #cc5220; // hover
-  --color-orange-700: #a84118; // active / pressed
+  // Cyan — active/selected state and footer only
+  --cyan-300: #8fd4f0;
+  --cyan-500: #2aaae0;
+  --cyan-600: #1e92c6;
 
-  // Teal — secondary accent (footer, highlights)
-  --color-teal-300: #7dd8e3;
-  --color-teal-400: #3bbac6;
-  --color-teal-500: #2aa3af;
-  --color-teal-600: #1d8a96;
+  // Neutrals / light chrome / text
+  --white: #ffffff;
+  --gray-050: #f0f0f0;
+  --gray-100: #f4f4f5;
+  --gray-300: #c7cdd4;
+  --ink-600: #5a6675;
+  --ink-900: #232f3e; // same as navy-900 — text on light backgrounds
 
   // Gold — ratings
-  --color-gold-400: #fbbf24;
-  --color-gold-500: #f59e0b;
+  --gold-400: #fbbf24;
+  --gold-500: #f59e0b;
 
   // Status
-  --color-green-500: #10b981;
-  --color-red-500: #ef4444;
-  --color-amber-400: #fbbf24;
-  --color-blue-300: #93c5fd;
-  --color-blue-400: #60a5fa;
-  --color-blue-500: #3b82f6;
+  --green-500: #10b981;
+  --red-500: #ef4444;
+  --amber-400: #fbbf24;
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Semantic colour tokens — use these in components
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── Semantic tokens ─────────────────────────────────────────────────────────
 
   // Backgrounds
-  --color-bg-base: var(--color-navy-900);
-  --color-bg-surface: var(--color-navy-800);
-  --color-bg-elevated: var(--color-navy-700);
-  --color-bg-overlay: rgba(0, 0, 0, 0.75);
-  --color-bg-inverse: var(--color-neutral-0);
+  --color-bg-base: var(--navy-900); // page body / navy stage
+  --color-bg-chrome: var(--gray-050); // header / light navigation bar
+  --color-bg-surface: var(--navy-800); // nav bar surface
+  --color-bg-elevated: var(--navy-700); // elevated panels
+  --color-bg-card: var(--white); // the one white surface (info/spec card)
+  --color-bg-overlay: rgba(0, 0, 0, 0.75); // modal scrim
+  --color-bg-inverse: var(--white);
 
-  // Aliases used by some older components
-  --color-surface: var(--color-navy-700);
-  --color-surface-2: var(--color-navy-600);
-  --color-surface-3: var(--color-navy-500);
+  // Backward-compat surface aliases used by older components
+  --color-surface: var(--navy-700);
+  --color-surface-1: var(--navy-800);
+  --color-surface-2: var(--navy-600);
+  --color-surface-3: var(--navy-500);
 
   // Text
-  --color-text-primary: var(--color-neutral-0);
-  --color-text-secondary: var(--color-navy-200);
-  --color-text-muted: var(--color-navy-300);
-  --color-text-disabled: var(--color-navy-400);
-  --color-text-inverse: var(--color-navy-900);
-  --color-text-brand: var(--color-orange-500);
-  --color-text-accent: var(--color-teal-400);
+  --color-text-primary: var(--white);
+  --color-text-secondary: var(--gray-300);
+  --color-text-muted: var(--ink-600);
+  --color-text-disabled: var(--navy-500);
+  --color-text-inverse: var(--ink-900); // text on light/white backgrounds
+  --color-text-brand: var(--orange-500);
+  --color-text-accent: var(--cyan-500);
 
-  // Interactive states
-  --color-interactive-bg: var(--color-navy-600);
-  --color-interactive-bg-hover: var(--color-navy-500);
-  --color-interactive-bg-active: var(--color-navy-400);
-  --color-interactive-bg-selected: var(--color-orange-500);
-  --color-interactive-text: var(--color-neutral-0);
+  // Interactive states (chips, selectable rows, toggles)
+  --color-interactive-bg: var(--navy-600);
+  --color-interactive-bg-hover: var(--navy-700);
+  --color-interactive-bg-active: var(--navy-500);
+  --color-interactive-bg-selected: var(--cyan-500); // cyan for active/selected
+  --color-interactive-text: var(--white);
 
-  // Borders
-  --color-border: var(--color-navy-600);
-  --color-border-strong: var(--color-navy-400);
-  --color-border-brand: var(--color-orange-500);
+  // Borders (used sparingly — prefer fill contrast)
+  --color-border: var(--navy-600);
+  --color-border-strong: var(--navy-500);
+  --color-border-brand: var(--orange-500);
 
-  // Brand (the primary action colour)
-  --color-brand-100: var(--color-orange-100);
-  --color-brand-400: var(--color-orange-400);
-  --color-brand-500: var(--color-orange-500);
-  --color-brand-600: var(--color-orange-600);
-  --color-brand-700: var(--color-orange-700);
+  // Brand (primary action — orange)
+  --color-brand-100: #fde8dc;
+  --color-brand-400: var(--orange-400);
+  --color-brand-500: var(--orange-500);
+  --color-brand-600: var(--orange-600);
+  --color-brand-700: #a84118;
+  --color-primary: var(--orange-500); // alias for convenience
 
-  // Accent (teal, used in footer / secondary highlights)
-  --color-accent: var(--color-teal-400);
-  --color-accent-300: var(--color-teal-300);
-  --color-accent-400: var(--color-teal-400);
-  --color-accent-500: var(--color-teal-500);
-  --color-accent-600: var(--color-teal-600);
+  // Accent (cyan — footer and active state only)
+  --color-accent: var(--cyan-500);
+  --color-accent-300: var(--cyan-300);
+  --color-accent-400: var(--cyan-500);
+  --color-accent-500: var(--cyan-500);
+  --color-accent-600: var(--cyan-600);
 
   // Status
-  --color-status-success: var(--color-green-500);
-  --color-status-warning: var(--color-amber-400);
-  --color-status-error: var(--color-red-500);
-  --color-status-info: var(--color-blue-500);
+  --color-status-success: var(--green-500);
+  --color-status-warning: var(--amber-400);
+  --color-status-error: var(--red-500);
+  --color-status-info: var(--cyan-500);
+  --color-success: var(--green-500);
+  --color-warning: var(--amber-400);
+  --color-error: var(--red-500);
+
+  // Raw palette backward-compat aliases (prefer semantic tokens above)
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
+  --color-navy-500: var(--navy-500);
+  --color-navy-400: var(--navy-500);
+  --color-navy-300: var(--ink-600);
+  --color-navy-200: var(--gray-300);
+  --color-navy-100: var(--cyan-300);
+  --color-orange-100: #fde8dc;
+  --color-orange-400: var(--orange-400);
+  --color-orange-500: var(--orange-500);
+  --color-orange-600: var(--orange-600);
+  --color-orange-700: #a84118;
+  --color-teal-300: var(--cyan-300);
+  --color-teal-400: var(--cyan-500);
+  --color-teal-500: var(--cyan-500);
+  --color-teal-600: var(--cyan-600);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-green-500: var(--green-500);
+  --color-red-500: var(--red-500);
+  --color-amber-400: var(--amber-400);
+  --color-neutral-0: var(--white);
+  --color-neutral-50: var(--gray-050);
+  --color-neutral-100: var(--gray-100);
+  --color-neutral-200: var(--gray-300);
+  --color-neutral-300: var(--gray-300);
+  --color-neutral-400: var(--ink-600);
+  --color-neutral-500: var(--ink-600);
+  --color-neutral-600: var(--ink-600);
+  --color-neutral-700: var(--navy-600);
+  --color-neutral-800: var(--navy-800);
+  --color-neutral-900: var(--navy-900);
+  --color-neutral-950: var(--navy-900);
+  --color-blue-300: #93c5fd;
+  --color-blue-400: var(--cyan-300);
+  --color-blue-500: var(--cyan-500);
 
   // Focus ring
-  --color-focus-ring: var(--color-blue-400);
-  --focus-ring-width: 2px;
+  --color-focus-ring: var(--orange-500);
+  --focus-ring-width: 3px;
   --focus-ring-offset: 2px;
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Typography
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── Typography ──────────────────────────────────────────────────────────────
+  // Single typeface: Open Sans (imported in index.html)
 
-  --font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-family-display: 'Oswald', 'Arial Narrow', 'Impact', system-ui, sans-serif;
-  --font-family-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  --font-body: 'Open Sans', system-ui, sans-serif;
+  --font-family-base: 'Open Sans', system-ui, sans-serif;
+  --font-family-display: 'Open Sans', system-ui, sans-serif;
+  --font-family-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 
-  --font-size-xs: 0.75rem; // 12 px
-  --font-size-sm: 0.875rem; // 14 px
-  --font-size-base: 1rem; // 16 px (alias)
-  --font-size-md: 1rem; // 16 px
-  --font-size-lg: 1.125rem; // 18 px
-  --font-size-xl: 1.25rem; // 20 px
-  --font-size-2xl: 1.5rem; // 24 px
-  --font-size-3xl: 1.875rem; // 30 px
-  --font-size-4xl: 2.25rem; // 36 px
-  --font-size-5xl: 3rem; // 48 px
+  // Style guide canonical scale
+  --font-size-display: 2.75rem; // 44px — film titles / hero
+  --font-size-h1: 2.125rem; // 34px — section headings
+  --font-size-h3: 1.25rem; // 20px — card titles / lead
+  --font-size-body: 1.0625rem; // 17px — body copy
+  --font-size-ui: 1rem; // 16px — UI labels
+  --font-size-caption: 0.8125rem; // 13px — captions / metadata
+
+  // Backward-compat aliases (components use these names)
+  --font-size-xs: 0.8125rem; // 13px
+  --font-size-sm: 1rem; // 16px
+  --font-size-md: 1rem; // 16px
+  --font-size-base: 1.0625rem; // 17px
+  --font-size-lg: 1.25rem; // 20px
+  --font-size-xl: 1.25rem; // 20px
+  --font-size-2xl: 2.125rem; // 34px
+  --font-size-3xl: 2.75rem; // 44px
+  --font-size-4xl: 3rem;
+  --font-size-5xl: 3.5rem;
 
   --font-weight-regular: 400;
-  --font-weight-medium: 500;
+  --font-weight-medium: 500; // kept for compat; prefer semibold (600)
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 
-  --line-height-tight: 1.25;
-  --line-height-snug: 1.375;
+  --line-height-tight: 1.1; // Display / titles
+  --line-height-snug: 1.25;
   --line-height-normal: 1.5;
-  --line-height-relaxed: 1.625;
+  --line-height-relaxed: 1.55; // Body copy
   --line-height-loose: 2;
 
-  --letter-spacing-tight: -0.025em;
+  --letter-spacing-tight: -0.01em;
   --letter-spacing-normal: 0em;
   --letter-spacing-wide: 0.025em;
   --letter-spacing-wider: 0.05em;
-  --letter-spacing-widest: 0.1em;
+  --letter-spacing-widest: 0.14em;
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Spacing — 4 px base grid
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── Spacing — 8pt base ──────────────────────────────────────────────────────
 
-  --space-1: 0.25rem; //  4 px
-  --space-2: 0.5rem; //  8 px
-  --space-3: 0.75rem; // 12 px
-  --space-4: 1rem; // 16 px
-  --space-5: 1.25rem; // 20 px
-  --space-6: 1.5rem; // 24 px
-  --space-8: 2rem; // 32 px
-  --space-10: 2.5rem; // 40 px
-  --space-12: 3rem; // 48 px
-  --space-16: 4rem; // 64 px
-  --space-20: 5rem; // 80 px
-  --space-24: 6rem; // 96 px
+  --sp-1: 0.25rem; //  4px
+  --sp-2: 0.5rem; //  8px
+  --sp-3: 0.75rem; // 12px
+  --sp-4: 1rem; // 16px
+  --sp-5: 1.5rem; // 24px
+  --sp-6: 2rem; // 32px
+  --sp-7: 3rem; // 48px
+  --sp-8: 4rem; // 64px
 
-  --interactive-min-size: 2.75rem; // 44 px
+  // Backward-compat aliases (components use --space-N)
+  --space-1: var(--sp-1); //  4px
+  --space-2: var(--sp-2); //  8px
+  --space-3: var(--sp-3); // 12px
+  --space-4: var(--sp-4); // 16px
+  --space-5: 1.25rem; // 20px — kept as-is (between sp-4 and sp-5)
+  --space-6: var(--sp-5); // 24px
+  --space-8: var(--sp-6); // 32px
+  --space-10: 2.5rem; // 40px
+  --space-12: var(--sp-7); // 48px
+  --space-16: var(--sp-8); // 64px
+  --space-20: 5rem; // 80px
+  --space-24: 6rem; // 96px
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Border radii
-  // ─────────────────────────────────────────────────────────────────────────
+  --interactive-min-size: 2.75rem; // 44px
 
+  // ── Corner radii ────────────────────────────────────────────────────────────
+  // Style guide canonical names
+  --r-xs: 0.25rem; //  4px — rows / inputs
+  --r-sm: 0.5rem; //  8px — chips / tags
+  --r-md: 1rem; // 16px — cards / panels
+  --r-lg: 1.75rem; // 28px — stage / hero surfaces
+  --r-pill: 9999px; // buttons
+
+  // Backward-compat aliases
   --radius-none: 0;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-full: 9999px;
+  --radius-sm: var(--r-xs); //  4px
+  --radius-md: var(--r-sm); //  8px (updated from 0.5rem — same value)
+  --radius-lg: 0.75rem; // 12px — kept for modal / sheet components
+  --radius-xl: var(--r-md); // 16px — popovers / dropdowns
+  --radius-2xl: var(--r-lg); // 28px — large stage elements
+  --radius-full: var(--r-pill);
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Elevation
-  // ─────────────────────────────────────────────────────────────────────────
+  // ── Elevation ───────────────────────────────────────────────────────────────
+  // Subtle, cool-toned shadows on light surfaces only
 
-  --shadow-none: none;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6), 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.65), 0 10px 10px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.8);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-pop: 0 8px 24px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-poster: 0 8px 32px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.6);
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Motion
-  // ─────────────────────────────────────────────────────────────────────────
+  // Backward-compat
+  --shadow-none: none;
+  --shadow-sm: var(--shadow-card);
+  --shadow-md: var(--shadow-card);
+  --shadow-lg: var(--shadow-pop);
+  --shadow-xl: var(--shadow-pop);
 
-  --duration-instant: 0ms;
-  --duration-fast: 100ms;
-  --duration-normal: 200ms;
-  --duration-slow: 300ms;
-  --duration-slower: 500ms;
+  // ── Motion ──────────────────────────────────────────────────────────────────
 
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-linear: linear;
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --duration-instant: 0ms;
+  --duration-fast: 100ms;
+  --duration-normal: 180ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
 
   --transition-fast: var(--duration-fast) var(--ease-out);
   --transition-normal: var(--duration-normal) var(--ease-out);
@@ -220,43 +273,67 @@
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// TV / 10-foot variant
+// TV / 10-foot variant — proportionally scaled for a 10-foot viewing distance
 // ─────────────────────────────────────────────────────────────────────────────
 [data-theme='tv'] {
-  --font-size-xs: 1.125rem;
-  --font-size-sm: 1.25rem;
-  --font-size-md: 1.5rem;
-  --font-size-lg: 1.875rem;
-  --font-size-xl: 2.25rem;
-  --font-size-2xl: 2.625rem;
-  --font-size-3xl: 3rem;
-  --font-size-4xl: 3.75rem;
-  --font-size-5xl: 4.5rem;
+  // Typography
+  --font-size-display: 5rem;
+  --font-size-h1: 3.75rem;
+  --font-size-h3: 2.5rem;
+  --font-size-body: 1.875rem;
+  --font-size-ui: 1.75rem;
+  --font-size-caption: 1.375rem;
 
-  --space-1: 0.5rem;
-  --space-2: 0.75rem;
-  --space-3: 1rem;
-  --space-4: 1.5rem;
+  --font-size-xs: 1.375rem;
+  --font-size-sm: 1.75rem;
+  --font-size-md: 1.75rem;
+  --font-size-base: 1.875rem;
+  --font-size-lg: 2.5rem;
+  --font-size-xl: 2.5rem;
+  --font-size-2xl: 3.75rem;
+  --font-size-3xl: 5rem;
+  --font-size-4xl: 5.5rem;
+  --font-size-5xl: 6.5rem;
+
+  // Spacing
+  --sp-1: 0.5rem;
+  --sp-2: 0.75rem;
+  --sp-3: 1rem;
+  --sp-4: 1.5rem;
+  --sp-5: 2.5rem;
+  --sp-6: 3rem;
+  --sp-7: 4.5rem;
+  --sp-8: 6rem;
+
+  --space-1: var(--sp-1);
+  --space-2: var(--sp-2);
+  --space-3: var(--sp-3);
+  --space-4: var(--sp-4);
   --space-5: 2rem;
-  --space-6: 2.5rem;
-  --space-8: 3rem;
-  --space-10: 4rem;
-  --space-12: 5rem;
-  --space-16: 6rem;
+  --space-6: var(--sp-5);
+  --space-8: var(--sp-6);
+  --space-10: 3.5rem;
+  --space-12: var(--sp-7);
+  --space-16: var(--sp-8);
   --space-20: 7.5rem;
   --space-24: 9rem;
 
   --interactive-min-size: 4.5rem;
 
-  --color-focus-ring: var(--color-teal-400);
+  // Focus ring — amber on TV for high contrast
+  --color-focus-ring: var(--cyan-500);
   --focus-ring-width: 4px;
   --focus-ring-offset: 4px;
 
+  // Motion — slightly slower for legibility at distance
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Reduced motion
+// ─────────────────────────────────────────────────────────────────────────────
 @media (prefers-reduced-motion: reduce) {
   :root,
   [data-theme='tv'] {

@@ -36,10 +36,10 @@ import { Component, computed, input } from '@angular/core';
         line-height: 1;
       }
       .ds-rating__star--filled {
-        color: #f59e0b;
+        color: var(--gold-500);
       }
       .ds-rating__star--half {
-        color: #f59e0b;
+        color: var(--gold-500);
       }
       .ds-rating__value {
         font-size: var(--font-size-sm);

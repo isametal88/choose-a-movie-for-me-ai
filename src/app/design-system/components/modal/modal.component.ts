@@ -52,18 +52,17 @@ import { booleanAttribute, Component, ElementRef, input, output, viewChild } fro
       .ds-modal__backdrop {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(2px);
+        background: var(--color-bg-overlay);
       }
       .ds-modal__dialog {
         position: relative;
-        background: var(--color-surface-1);
-        border-radius: var(--radius-xl);
-        padding: var(--space-6);
+        background: var(--color-bg-surface);
+        border-radius: var(--r-md);
+        padding: var(--sp-6);
         max-width: 90vw;
         max-height: 90vh;
         overflow-y: auto;
-        box-shadow: var(--shadow-xl);
+        box-shadow: var(--shadow-pop);
         z-index: 1;
         width: 480px;
       }

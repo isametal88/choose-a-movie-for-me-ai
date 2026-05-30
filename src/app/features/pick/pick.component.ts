@@ -142,8 +142,14 @@ import { CriteriaStore } from '../criteria/criteria.store';
       .pick-screen {
         max-width: 1100px;
         margin: 0 auto;
-        padding: var(--space-8) var(--space-6);
+        padding: var(--sp-6) var(--sp-5);
         min-height: 70vh;
+      }
+
+      @media (min-width: 600px) {
+        .pick-screen {
+          padding: var(--sp-7) var(--sp-6);
+        }
       }
 
       /* ── Loading ──────────────────────────────────────────────── */
@@ -152,15 +158,15 @@ import { CriteriaStore } from '../criteria/criteria.store';
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: var(--space-6);
-        padding-top: var(--space-16);
+        gap: var(--sp-5);
+        padding-top: var(--sp-8);
       }
 
       .pick-screen__loading-text {
         margin: 0;
         color: var(--color-text-secondary);
-        font-size: var(--font-size-xl);
-        font-weight: var(--font-weight-medium);
+        font-size: var(--font-size-h3);
+        font-weight: var(--font-weight-semibold);
       }
 
       /* ── Picked result ────────────────────────────────────────── */
@@ -168,13 +174,13 @@ import { CriteriaStore } from '../criteria/criteria.store';
       .pick-screen__result {
         display: grid;
         grid-template-columns: 1fr;
-        gap: var(--space-6);
+        gap: var(--sp-5);
       }
 
       @media (min-width: 640px) {
         .pick-screen__result {
           grid-template-columns: 220px 1fr;
-          gap: var(--space-8);
+          gap: var(--sp-6);
           align-items: start;
         }
       }
@@ -189,47 +195,56 @@ import { CriteriaStore } from '../criteria/criteria.store';
         }
       }
 
+      /* Orange eyebrow label — "La tua scelta" */
       .pick-screen__label {
-        font-family: var(--font-family-display);
-        font-size: var(--font-size-xs);
-        font-weight: 700;
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-extrabold);
         letter-spacing: var(--letter-spacing-widest);
         text-transform: uppercase;
-        color: var(--color-brand-500);
-        margin: 0 0 var(--space-2);
+        color: var(--orange-500);
+        margin: 0 0 var(--sp-2);
       }
 
+      /* Title band — navy-600 on navy stage */
       .pick-screen__title {
-        font-size: var(--font-size-4xl);
-        font-weight: var(--font-weight-bold);
-        margin: 0 0 var(--space-3);
+        background: var(--navy-600);
+        border-radius: var(--r-xs);
+        padding: var(--sp-3) var(--sp-4);
+        font-size: var(--font-size-display);
+        font-weight: var(--font-weight-extrabold);
+        margin: 0 0 var(--sp-3);
         line-height: var(--line-height-tight);
+        color: var(--white);
       }
 
+      /* Info strip — navy-600 */
       .pick-screen__meta {
         display: flex;
         align-items: center;
-        gap: var(--space-4);
-        margin-bottom: var(--space-5);
+        gap: var(--sp-4);
+        margin-bottom: var(--sp-4);
         flex-wrap: wrap;
+        background: var(--navy-600);
+        border-radius: var(--r-xs);
+        padding: var(--sp-2) var(--sp-4);
       }
 
       .pick-screen__year {
-        font-size: var(--font-size-sm);
-        color: var(--color-text-secondary);
-        font-weight: var(--font-weight-medium);
+        font-size: var(--font-size-ui);
+        color: var(--white);
+        font-weight: var(--font-weight-semibold);
       }
 
       .pick-screen__overview {
         color: var(--color-text-secondary);
         line-height: var(--line-height-relaxed);
-        margin: 0 0 var(--space-8);
-        font-size: var(--font-size-md);
+        margin: 0 0 var(--sp-6);
+        font-size: var(--font-size-body);
       }
 
       .pick-screen__actions {
         display: flex;
-        gap: var(--space-3);
+        gap: var(--sp-3);
         flex-wrap: wrap;
       }
 
@@ -240,17 +255,18 @@ import { CriteriaStore } from '../criteria/criteria.store';
       }
 
       .pick-screen__search-header {
-        margin-bottom: var(--space-6);
+        margin-bottom: var(--sp-5);
       }
 
       .pick-screen__search-title {
-        font-size: var(--font-size-2xl);
-        font-weight: var(--font-weight-bold);
-        margin: 0 0 var(--space-2);
+        font-size: var(--font-size-h1);
+        font-weight: var(--font-weight-extrabold);
+        margin: 0 0 var(--sp-2);
+        letter-spacing: var(--letter-spacing-tight);
       }
 
       .pick-screen__search-note {
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-caption);
         color: var(--color-text-muted);
         margin: 0;
       }
@@ -258,17 +274,16 @@ import { CriteriaStore } from '../criteria/criteria.store';
       .pick-screen__search-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: var(--space-4);
-        margin-bottom: var(--space-6);
+        gap: var(--sp-4);
+        margin-bottom: var(--sp-5);
       }
 
       .pick-screen__search-item {
         display: flex;
         flex-direction: column;
-        gap: var(--space-2);
+        gap: var(--sp-2);
         text-decoration: none;
         color: inherit;
-        border-radius: var(--radius-md);
         transition: transform var(--transition-fast);
       }
 
@@ -282,8 +297,8 @@ import { CriteriaStore } from '../criteria/criteria.store';
       }
 
       .pick-screen__search-item-title {
-        font-size: var(--font-size-sm);
-        font-weight: var(--font-weight-medium);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
         margin: 0;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -293,21 +308,19 @@ import { CriteriaStore } from '../criteria/criteria.store';
       }
 
       .pick-screen__search-placeholder {
-        aspect-ratio: 2/3;
-        background: var(--color-bg-elevated);
-        border-radius: var(--radius-md);
+        aspect-ratio: 11/16;
+        background: var(--navy-700);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-caption);
         color: var(--color-text-secondary);
-        padding: var(--space-2);
+        padding: var(--sp-2);
         text-align: center;
       }
 
       .pick-screen__search-footer {
-        padding-top: var(--space-4);
-        border-top: 1px solid var(--color-border);
+        padding-top: var(--sp-4);
       }
 
       /* ── Empty / exhausted / error ───────────────────────────── */
@@ -316,22 +329,22 @@ import { CriteriaStore } from '../criteria/criteria.store';
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: var(--space-4);
-        padding-top: var(--space-16);
+        gap: var(--sp-4);
+        padding-top: var(--sp-8);
         width: 100%;
         text-align: center;
       }
 
       .pick-screen__state-heading {
         margin: 0;
-        font-family: var(--font-family-display);
-        font-size: var(--font-size-3xl);
-        font-weight: 700;
-        letter-spacing: var(--letter-spacing-wide);
+        font-size: var(--font-size-display);
+        font-weight: var(--font-weight-extrabold);
+        letter-spacing: var(--letter-spacing-tight);
+        line-height: var(--line-height-tight);
       }
 
       .pick-screen__state-message {
-        font-size: var(--font-size-lg);
+        font-size: var(--font-size-h3);
         color: var(--color-text-secondary);
         max-width: 440px;
         margin: 0;

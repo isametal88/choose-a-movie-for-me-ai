@@ -46,8 +46,8 @@ export type TextFieldType = 'text' | 'search' | 'email' | 'url' | 'password';
         gap: var(--space-1);
       }
       .ds-text-field__label {
-        font-size: var(--font-size-sm);
-        font-weight: 500;
+        font-size: var(--font-size-ui);
+        font-weight: var(--font-weight-semibold);
         color: var(--color-text-primary);
       }
       .ds-text-field__input-wrapper {
@@ -55,13 +55,17 @@ export type TextFieldType = 'text' | 'search' | 'email' | 'url' | 'password';
       }
       .ds-text-field__control {
         width: 100%;
-        padding: var(--space-2) var(--space-3);
-        border: 1.5px solid var(--color-border);
-        border-radius: var(--radius-md);
-        background: var(--color-surface-1);
+        padding: var(--sp-2) var(--sp-3);
+        border: none;
+        border-radius: var(--r-xs);
+        background: var(--color-interactive-bg);
         color: var(--color-text-primary);
-        font-size: var(--font-size-base);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body);
         box-sizing: border-box;
+      }
+      .ds-text-field__control::placeholder {
+        color: var(--color-text-muted);
       }
       .ds-text-field__control:focus-visible {
         outline: var(--focus-ring-width) solid var(--color-focus-ring);

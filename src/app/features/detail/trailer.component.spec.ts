@@ -38,7 +38,7 @@ describe('TrailerComponent', () => {
     it('"Watch trailer" button has correct aria-label', async () => {
       const { fixture } = await setup('abc123');
       const btn = fixture.nativeElement.querySelector('.trailer__play-btn') as HTMLButtonElement;
-      expect(btn.getAttribute('aria-label')).toBe('Play trailer');
+      expect(btn.getAttribute('aria-label')).toBe('Watch trailer');
     });
 
     it('does not show iframe before play is clicked', async () => {

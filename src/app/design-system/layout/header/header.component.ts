@@ -23,11 +23,11 @@ import { RouterLink } from '@angular/router';
           <!-- Clapperboard body -->
           <rect x="2" y="18" width="40" height="24" rx="3" fill="white" />
           <!-- Film holes left -->
-          <rect x="6" y="23" width="4" height="6" rx="1" fill="#162032" />
-          <rect x="6" y="32" width="4" height="6" rx="1" fill="#162032" />
+          <rect x="6" y="23" width="4" height="6" rx="1" fill="#293647" />
+          <rect x="6" y="32" width="4" height="6" rx="1" fill="#293647" />
           <!-- Film holes right -->
-          <rect x="34" y="23" width="4" height="6" rx="1" fill="#162032" />
-          <rect x="34" y="32" width="4" height="6" rx="1" fill="#162032" />
+          <rect x="34" y="23" width="4" height="6" rx="1" fill="#293647" />
+          <rect x="34" y="32" width="4" height="6" rx="1" fill="#293647" />
           <!-- Clapper arm base -->
           <rect x="2" y="10" width="40" height="10" rx="3" fill="white" />
           <!-- Clapper arm stripes -->
@@ -35,10 +35,10 @@ import { RouterLink } from '@angular/router';
             <rect x="2" y="10" width="40" height="10" rx="3" />
           </clipPath>
           <g clip-path="url(#clapper-clip)">
-            <polygon points="2,10 10,10 2,20" fill="#162032" />
-            <polygon points="14,10 22,10 10,20 2,20" fill="#162032" />
-            <polygon points="26,10 34,10 22,20 14,20" fill="#162032" />
-            <polygon points="38,10 42,10 42,16 30,20" fill="#162032" />
+            <polygon points="2,10 10,10 2,20" fill="#293647" />
+            <polygon points="14,10 22,10 10,20 2,20" fill="#293647" />
+            <polygon points="26,10 34,10 22,20 14,20" fill="#293647" />
+            <polygon points="38,10 42,10 42,16 30,20" fill="#293647" />
           </g>
           <!-- Hinge -->
           <circle cx="9" cy="10" r="3" fill="#e8622a" />
@@ -65,9 +65,8 @@ import { RouterLink } from '@angular/router';
         align-items: center;
         justify-content: space-between;
         padding: var(--space-3) var(--space-6);
-        background: var(--color-bg-surface);
-        border-bottom: 1px solid var(--color-border);
-        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+        background: var(--color-bg-chrome);
+        border-bottom: 1px solid #e2e5e9;
       }
 
       .app-header__logo {
@@ -75,7 +74,7 @@ import { RouterLink } from '@angular/router';
         align-items: center;
         gap: var(--space-3);
         text-decoration: none;
-        color: var(--color-text-primary);
+        color: var(--color-text-inverse);
       }
 
       .app-header__logo:focus-visible {
@@ -91,11 +90,11 @@ import { RouterLink } from '@angular/router';
       .app-header__logo-text {
         font-family: var(--font-family-display);
         font-size: var(--font-size-sm);
-        font-weight: 700;
+        font-weight: 800;
         line-height: 1.2;
         letter-spacing: var(--letter-spacing-wider);
         text-transform: uppercase;
-        color: var(--color-text-primary);
+        color: var(--color-text-inverse);
       }
 
       .app-header__menu-btn {
@@ -114,7 +113,7 @@ import { RouterLink } from '@angular/router';
       }
 
       .app-header__menu-btn:hover {
-        background: var(--color-interactive-bg-hover);
+        background: rgba(0, 0, 0, 0.06);
       }
 
       .app-header__menu-btn:focus-visible {
@@ -125,8 +124,8 @@ import { RouterLink } from '@angular/router';
       .app-header__menu-line {
         display: block;
         width: 100%;
-        height: 2px;
-        background: var(--color-text-primary);
+        height: 2.5px;
+        background: var(--color-text-inverse);
         border-radius: 1px;
       }
     `,
